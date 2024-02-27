@@ -22,10 +22,15 @@ function themostboringfunctionnameever() {
 #for arg in $@; do
 #	let i=i+1
 #	if [[ $arg == "--interval" ]]; then
-#		j=$(echo "$i+1" | bc); k=\
-#		interval=$
+#  j=$(echo "$i+1" | bc) #Get the position of the argument containing the number of seconds to sleep
+#  intervalindex=\$$j 
+#  interval=$(echo $intervalindex)
+#  argstoignore=$argstoignore.$i.$j
 #	elif [[ $arg == "-i" ]]; then
-#		interval=
+#  j=$(echo "$i+1" | bc)
+#  intervalindex=\$$j
+#  interval=$(echo $intervalindex)
+#  argstoignore=$argstoignore.$i.$j
 #	fi
 #done
 
