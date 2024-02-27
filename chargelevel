@@ -1,0 +1,9 @@
+# Get the battery's full energy capacity
+energyfull=$(cat /sys/class/power_supply/BAT0/energy_full)
+
+# Get the current battery energy level
+energynow=$(cat /sys/class/power_supply/BAT0/energy_now)
+
+# Divide them both to get the current charge percentage
+
+echo "scale=2; $energynow*100/$energyfull" | bc

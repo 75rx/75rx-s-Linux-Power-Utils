@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+
+# Variables
+
+# Current battery level
+chargeatboot=$(echo $chargeatboot)
+
+# Battery level at boot
+chargenow=$(chargelevel)
+
+
+# Code
+
+
+# 1.Display power usage statistics for the current session
+
+# 1.1 Calculate the total charge used (%)
+chargeused=$(echo "scale=2; $chargeatboot-$chargenow" | bc)
+
+# 1.2 Get and format the system uptime to a numerical value (minutes)
+sysuptime=$(uptime -p | sed s/up\ // | sed s/\ minutes//)
+
+# 1.3 Calculate the average system runtime on a unit (1%) of battery charge in minutes
+avgtimeperunitcharge=$(echo "scale=1; $sysuptime/$chargeused" | bc)
+
+# 1.4 Display the total power used in the current session's duration
+echo "Used $chargeused% in $sysuptime mins"
+
+
+# 2.Display the remaining battery time
+remainingtime=$(echo "scale=2; $avgtimeperunitcharge*$chargenow" | bc)
+ #converting to hours
+remainingtime=$(echo "scale=1; $remainingtime/60" | bc)
+echo "Tot. remaining battery time  = $remainingtime hours"
+
+
+# 3.Predict the total battery time
+totaltime=$(echo "scale=2; $avgtimeperunitcharge*100" | bc)
+ #converting to hours
+totaltime=$(echo "scale=1; $totaltime/60" | bc)
+echo "Total predicted battery time = $totaltime hours"

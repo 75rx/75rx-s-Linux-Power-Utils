@@ -1,0 +1,49 @@
+# Display the current consumption in watts
+
+
+# Variables
+
+interval=2
+
+
+# Functions
+
+# Actual function that calculates the power draw
+function themostboringfunctionnameever() {
+	local rawpowerdraw=$(cat /sys/class/power_supply/BAT0/power_now)
+	local powerdraw=$(echo "scale=2; $rawpowerdraw/1000000" | bc)
+	echo "$powerdraw W"
+}
+
+
+# Code
+
+#i=0
+#for arg in $@; do
+#	let i=i+1
+#	if [[ $arg == "--interval" ]]; then
+#		j=$(echo "$i+1" | bc); k=\
+#		interval=$
+#	elif [[ $arg == "-i" ]]; then
+#		interval=
+#	fi
+#done
+
+#for arg in $@; do
+#	case $arg in
+#		*)
+			while true; do
+				themostboringfunctionnameever
+				sleep 2
+				#sleep $interval
+			done
+#			;;
+#		"--now"|"-n")
+#			themostboringfunctionnameever()
+#			return 0
+#			;;
+#		"--interval"|"-i")
+#			# Use this case to ignore the arguments passed 
+#			;;
+#	esac
+#done
