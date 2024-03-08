@@ -26,12 +26,13 @@ chargeused=$(echo "scale=2; $chargeatboot - $chargenow" | bc)
 
 # 1.2 Get and format the system uptime to a numerical value (minutes)
 sysuptime=$(echo "$(awk '{print $1}' /proc/uptime) / 60" | bc)
+uptimedisplay=$(uptime -p | sed s/up\ //)
 
 # 1.3 Calculate the average system runtime on a unit (1%) of battery charge in minutes
 avgtimeperunitcharge=$(echo "scale=1; $sysuptime / $chargeused" | bc)
 
 # 1.4 Display the total power used in the current session's duration
-echo "Used $chargeused% in $sysuptime mins"
+echo "Used $chargeused% in $uptimedisplay"
 
 
 # 2.Display the remaining battery time
